@@ -2,7 +2,7 @@
 DIR=`dirname $0`
 set -x
 
-oc login -u test -p test --insecure-skip-tls-verify=true https://localhost:8443
+oc login -u developer -p developer --insecure-skip-tls-verify=true https://localhost:8443
 oc delete project enmasse-ci
 
 oc new-project enmasse-ci
@@ -15,4 +15,4 @@ $DIR/wait_until_up.sh 7
 
 sleep 120
 
-OPENSHIFT_USER=test OPENSHIFT_TOKEN=`oc config view -o jsonpath='{.users[?(@.name == "test/localhost:8443")].user.token}'` OPENSHIFT_URL=https://localhost:8443 PN_TRACE_FRM=1 gradle check -i
+OPENSHIFT_USER=developer OPENSHIFT_TOKEN=`oc config view -o jsonpath='{.users[?(@.name == "developer/localhost:8443")].user.token}'` OPENSHIFT_URL=https://localhost:8443 PN_TRACE_FRM=1 gradle check -i
