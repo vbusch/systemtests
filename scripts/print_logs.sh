@@ -11,4 +11,4 @@ do
 done
 
 # Docker logs
-docker logs origin
+# docker logs origin 2>&1
