@@ -26,7 +26,7 @@ function run_test() {
     USE_TLS=$2
     TEMPLATE=$3
 
-    oc process -f $TEMPLATE | oc create -f -
+    oc process -f $TEMPLATE BROKER_REPO=lulf/artemis SUBSERV_REPO=lulf/subserv | oc create -f -
 
     $DIR/wait_until_up.sh 3 || exit 1
 
