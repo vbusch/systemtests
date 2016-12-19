@@ -47,7 +47,9 @@ public class ConfigServTest extends VertxTestBase {
                 receiver.open();
             }
         });
+        Thread.sleep(10000);
         deploy(Destination.queue("myqueue"));
+        Thread.sleep(10000);
         assertPods(latestPods, 1, new TimeoutBudget(2, TimeUnit.MINUTES));
         deploy(Destination.queue("myqueue"), Destination.queue("anotherqueue"));
         assertPods(latestPods, 2, new TimeoutBudget(2, TimeUnit.MINUTES));
