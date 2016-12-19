@@ -26,13 +26,13 @@ function run_test() {
     USE_TLS=$2
     TEMPLATE=$3
 
-    oc process -f $TEMPLATE BROKER_REPO=lulf/artemis SUBSERV_REPO=lulf/subserv | oc create -f -
+    oc process -f $TEMPLATE BROKER_REPO=lulf/artemis SUBSERV_REPO=lulf/subserv CONFIGSERV_REPO=lulf/configserv | oc create -f -
 
     $DIR/wait_until_up.sh 3 || exit 1
 
     sleep 120
 
-    OPENSHIFT_USE_TLS=$USE_TLS OPENSHIFT_NAMESPACE=$PROJECT_NAME OPENSHIFT_USER=test OPENSHIFT_TOKEN=`oc config view -o jsonpath='{.users[?(@.name == "test/localhost:8443")].user.token}'` OPENSHIFT_MASTER_URL=https://localhost:8443 gradle -Dtest.single=ConfigServTest check -i --rerun-tasks -Djava.net.preferIPv4Stack=true
+    OPENSHIFT_USE_TLS=$USE_TLS OPENSHIFT_NAMESPACE=$PROJECT_NAME OPENSHIFT_USER=test OPENSHIFT_TOKEN=`oc config view -o jsonpath='{.users[?(@.name == "test/localhost:8443")].user.token}'` OPENSHIFT_MASTER_URL=https://localhost:8443 gradle check -i --rerun-tasks -Djava.net.preferIPv4Stack=true
 }
 
 setup_test enmasse-ci-default
