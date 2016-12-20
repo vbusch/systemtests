@@ -10,7 +10,7 @@ function runcmd {
 for i in `oc get pods | cut -f 1 -d ' ' | grep -v NAME`
 do
     runcmd "oc logs $i"
-    if [ "$?" -gt "0" ]
+    if [ "$?" -gt 0 ]
     then
         runcmd "oc logs -c restapi $i"
         runcmd "oc logs -c configserv $i"
