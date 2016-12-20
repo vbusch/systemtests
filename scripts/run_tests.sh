@@ -28,7 +28,7 @@ function run_test() {
 
     oc process -f $TEMPLATE BROKER_REPO=lulf/artemis SUBSERV_REPO=lulf/subserv CONFIGSERV_REPO=lulf/configserv | oc create -f -
 
-    $DIR/wait_until_up.sh 3 || exit 1
+    $DIR/wait_until_up.sh 4 || exit 1
 
     sleep 120
 
