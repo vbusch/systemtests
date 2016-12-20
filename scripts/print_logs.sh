@@ -2,10 +2,9 @@
 function runcmd {
     echo ''
     echo "$1 : "
-    ret=`$1`
+    $1
     echo ''
     echo '#######################################################################'
-    echo $ret
 }
 
 for pod in `oc get pods -o jsonpath='{.items[*].metadata.name}'`
